@@ -9,7 +9,7 @@ Adding another news source is simple as E = mc^2.
 #Features
 - Super Fast!
 - Do you want to save news that you liked? You'r welcome!
-- Create your own category and don't limiting yourself.
+- Create your own categories and don't limiting yourself.
 - Special mode to take a photo of your fillings while reading the news.
 
 #Developers
