@@ -5,3 +5,7 @@ This is 21st century isn't it? We are living in century where everything change 
 We introduce super fast RSS reader for your Android. With it help you will always receive the latest news from all the sources you like.
 
 Adding another news source is simple as E = mc^2. 
+
+#Developers
+
+Your humble servant: Masterniy Igor
