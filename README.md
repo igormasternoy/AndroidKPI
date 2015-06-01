@@ -6,6 +6,12 @@ We introduce super fast RSS reader for your Android. With it help you will alway
 
 Adding another news source is simple as E = mc^2. 
 
+#Features
+- Super Fast!
+- Do you want to save news that you liked? You'r welcome!
+- Create your own category and don't limiting yourself.
+- Special mode to take a photo of your fillings while reading the news.
+
 #Developers
 
 Your humble servant: Masterniy Igor
