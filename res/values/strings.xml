@@ -14,5 +14,6 @@
     <string name="fragment_ok">OK</string>
     <string name="title_activity_add_feed">AddFeed</string>
     <string name="fragment_cancel_btn">Cancel</string>
+    <string name="ilovemyself">https://github.com/igormasternoy/AndroidKPI</string>
 
 </resources>
