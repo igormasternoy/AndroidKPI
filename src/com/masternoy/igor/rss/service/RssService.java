@@ -103,7 +103,7 @@ public class RssService extends AsyncTask<String, Void, List<Article>> {
 		} catch (ParserConfigurationException e) {
 			Log.e("RSS Handler Parser Config", e.toString());
 		}
-		return null;
+		return articleList;
 
 	}
 }

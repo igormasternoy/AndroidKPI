@@ -27,8 +27,11 @@ public class FeedRepository {
 	private static final int DATABASE_VERSION = 1;
 
 	private static final String DATABASE_CREATE_LIST_TABLE = "create table if not exists "
-			+ DATABASE_TABLE + " (" + KEY_ROWID
-			+ " integer primary key autoincrement, " + KEY_NAME
+			+ DATABASE_TABLE
+			+ " ("
+			+ KEY_ROWID
+			+ " integer primary key autoincrement, "
+			+ KEY_NAME
 			+ " text not null, " + KEY_URL + " text not null);";
 
 	private SQLiteHelper sqLiteHelper;
@@ -79,6 +82,11 @@ public class FeedRepository {
 		initialValues.put(KEY_NAME, feed.getName());
 		initialValues.put(KEY_URL, feed.getUrl().toString());
 		return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
+	}
+
+	public boolean delete(long guid) {
+		return sqLiteDatabase.delete(DATABASE_TABLE, KEY_ROWID + "='" + guid
+				+ "'", null) > 0;
 	}
 
 	public List<Feed> getBlogListing() {
