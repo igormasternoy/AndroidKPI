@@ -9,32 +9,30 @@
     tools:context="com.masternoy.igor.rss.SavedItems" >
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/addFeedBtn"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:text="Button" />
+        android:text="@string/addFeedBtn" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/removeFeedBtn"
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button2"
-        android:layout_alignBottom="@+id/button2"
-        android:layout_toRightOf="@+id/button2"
-        android:text="Button" />
+        android:layout_alignBaseline="@+id/addFeedBtn"
+        android:layout_centerHorizontal="true"
+        android:text="@string/removeFeedBtn" />
 
     <ListView
-        android:id="@+id/savedItemsListView"
-        android:layout_width="match_parent"
+        android:id="@+id/feedsListView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button2"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@+id/button2" >
-
+        android:layout_alignLeft="@+id/addFeedBtn"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/removeFeedBtn" >
     </ListView>
 
 </RelativeLayout>

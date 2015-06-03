@@ -1,4 +1,4 @@
-package com.masternoy.igor.rss.service;
+package com.masternoy.igor.rss.entities;
 
 import java.io.Serializable;
 import java.net.URL;

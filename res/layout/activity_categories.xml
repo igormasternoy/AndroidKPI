@@ -9,7 +9,7 @@
     tools:context="com.masternoy.igor.rss.Categories" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/removeFeedBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -20,9 +20,9 @@
         android:id="@+id/categoriesListView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/removeFeedBtn"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/button1" >
+        android:layout_below="@+id/removeFeedBtn" >
 
     </ListView>
 

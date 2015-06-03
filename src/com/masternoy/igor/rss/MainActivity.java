@@ -1,18 +1,20 @@
 package com.masternoy.igor.rss;
 
-import com.masternoy.igor.rss.service.RssService;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AbsListView;
-import android.widget.AbsListView.OnScrollListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+
+import com.masternoy.igor.rss.db.FeedRepository;
+import com.masternoy.igor.rss.entities.Feed;
+import com.masternoy.igor.rss.service.RssService;
 
 public class MainActivity extends Activity {
 	private static final String BLOG_URL = "http://blog.nerdability.com/feeds/posts/default";
@@ -23,55 +25,48 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		initListView();
+		refreshListView();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
+	// TODO [imasternoy] Move navigation somewhere
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		Intent intent;
+		if (id == R.layout.activity_categories) {
+			intent = new Intent(this, Categories.class);
+			startActivity(intent);
+			return true;
+		} else if (id == R.layout.activity_saved_items) {
+			intent = new Intent(this, SavedItems.class);
+			startActivity(intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 
-	private void initListView() {
+	private void refreshListView() {
 		ListView lw = (ListView) findViewById(R.id.mainListView);
-		lw.setOnScrollListener(new OnScrollListener() {
-
-			public void onScrollStateChanged(AbsListView view, int scrollState) {
-				// Log.d(LOG_TAG, "scrollState = " + scrollState);
-			}
-
-			public void onScroll(AbsListView view, int firstVisibleItem,
-					int visibleItemCount, int totalItemCount) {
-				Log.d("LOG", "scroll: firstVisibleItem = " + firstVisibleItem
-						+ ", visibleItemCount" + visibleItemCount
-						+ ", totalItemCount" + totalItemCount);
-			}
-		});
-		lw.setOnItemLongClickListener(new OnItemLongClickListener() {
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				return false;
-			}
-		});
-		refreshList(lw);
-	}
-
-	private void refreshList(ListView lw) {
 		rssService = new RssService(lw, this);
-		rssService.execute(BLOG_URL);
+
+		FeedRepository feedRepository = new FeedRepository(this);
+		feedRepository.openToRead();
+		List<Feed> feeds = feedRepository.getBlogListing();
+		feedRepository.close();
+
+		List<String> getUrls = new ArrayList<String>();
+
+		for (Feed feed : feeds) {
+			// TODO [imasternoy] It's 22:20 And I'm Lazy
+			// refactor to use list of URLs directly
+			getUrls.add(feed.getUrl().toString());
+		}
+		rssService.execute(getUrls.toArray(new String[feeds.size()]));
 	}
 }

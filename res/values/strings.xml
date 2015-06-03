@@ -7,6 +7,12 @@
     <string name="title_activity_categories">Categories</string>
     <string name="title_activity_saved_items">SavedItems</string>
     <string name="categories">Categories</string>
-    <string name="savedItems">Saved items</string>
+    <string name="savedItems">Feeds</string>
+    <string name="activityMain">RSS</string>
+    <string name="addFeedBtn">AddFeed</string>
+    <string name="removeFeedBtn">Remove Feed</string>
+    <string name="fragment_ok">OK</string>
+    <string name="title_activity_add_feed">AddFeed</string>
+    <string name="fragment_cancel_btn">Cancel</string>
 
 </resources>

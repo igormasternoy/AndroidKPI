@@ -3,9 +3,10 @@
     tools:context="com.masternoy.igor.rss.Categories" >
 
     <item
-        android:id="@+id/action_settings"
+        android:id="@layout/activity_main"
         android:orderInCategory="100"
         android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:title="@string/activityMain"/>
+    <item android:id="@layout/activity_saved_items" android:title="@string/savedItems"></item>
 
 </menu>

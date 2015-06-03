@@ -7,6 +7,8 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.masternoy.igor.rss.entities.Article;
+
 public class RSSReader extends DefaultHandler {
 
 	// Feed and Article objects to use for temporary storage

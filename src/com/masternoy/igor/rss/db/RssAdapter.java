@@ -1,7 +1,7 @@
 package com.masternoy.igor.rss.db;
 
 
-import com.masternoy.igor.rss.service.Article;
+import com.masternoy.igor.rss.entities.Article;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 
-public class DbAdapter{
+public class RssAdapter{
 	
 	public static final String KEY_ROWID = BaseColumns._ID;
 	public static final String KEY_GUID = "guid";
@@ -24,7 +24,7 @@ public class DbAdapter{
 	private static final String DATABASE_TABLE = "blogpostlist";
 	private static final int DATABASE_VERSION = 1;
 	
-	private static final String DATABASE_CREATE_LIST_TABLE = "create table " + DATABASE_TABLE + " (" + 
+	private static final String DATABASE_CREATE_LIST_TABLE = "create table if not exists " + DATABASE_TABLE + " (" + 
 																KEY_ROWID +" integer primary key autoincrement, "+ 
 																KEY_GUID + " text not null, " +
 																KEY_READ + " boolean not null, " + 
@@ -35,17 +35,17 @@ public class DbAdapter{
 	private SQLiteDatabase sqLiteDatabase;
 	private Context context;
 
-	public DbAdapter(Context c){
+	public RssAdapter(Context c){
 		context = c;
 	}
 
-	public DbAdapter openToRead() throws android.database.SQLException {
+	public RssAdapter openToRead() throws android.database.SQLException {
 		sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
 		sqLiteDatabase = sqLiteHelper.getReadableDatabase();
 		return this; 
 	}
 
-	public DbAdapter openToWrite() throws android.database.SQLException {
+	public RssAdapter openToWrite() throws android.database.SQLException {
 		sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
 		sqLiteDatabase = sqLiteHelper.getWritableDatabase();
 		return this; 

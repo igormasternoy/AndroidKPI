@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.masternoy.igor.rss.R;
-import com.masternoy.igor.rss.service.Article;
+import com.masternoy.igor.rss.entities.Article;
 import com.masternoy.igor.rss.utils.DateUtils;
 
 public class ArticleAdapter extends ArrayAdapter<Article> {
@@ -44,7 +44,7 @@ public class ArticleAdapter extends ArrayAdapter<Article> {
 		
 		TextView dateView = (TextView) rowView.findViewById(R.id.article_listing_smallprint);
 		String pubDate = article.getPubDate();
-		SimpleDateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss Z", Locale.ENGLISH);
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ");
 		Date pDate;
 		try {
 			pDate = df.parse(pubDate);

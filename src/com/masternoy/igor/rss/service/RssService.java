@@ -2,6 +2,7 @@ package com.masternoy.igor.rss.service;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -12,7 +13,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import com.masternoy.igor.rss.db.DbAdapter;
+import com.masternoy.igor.rss.db.RssAdapter;
+import com.masternoy.igor.rss.entities.Article;
 import com.masternoy.igor.rss.view.ArticleAdapter;
 
 import android.app.Activity;
@@ -49,14 +51,14 @@ public class RssService extends AsyncTask<String, Void, List<Article>> {
 			public void run() {
 				for (Article a : articles) {
 					Log.d("DB", "Searching DB for GUID: " + a.getGuid());
-					DbAdapter dba = new DbAdapter(context);
+					RssAdapter dba = new RssAdapter(context);
 					dba.openToRead();
 					Article fetchedArticle = dba.getBlogListing(a.getGuid());
 					dba.close();
 					if (fetchedArticle == null) {
 						Log.d("DB",
 								"Found entry for first time: " + a.getTitle());
-						dba = new DbAdapter(context);
+						dba = new RssAdapter(context);
 						dba.openToWrite();
 						dba.insertBlogListing(a.getGuid());
 						dba.close();
@@ -76,21 +78,22 @@ public class RssService extends AsyncTask<String, Void, List<Article>> {
 
 	@Override
 	protected List<Article> doInBackground(String... urls) {
-		String feed = urls[0];
 		URL url = null;
+		List<Article> articleList = new ArrayList<Article>();
 		try {
 			SAXParserFactory spf = SAXParserFactory.newInstance();
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
 
-			url = new URL(feed);
-			RSSReader rssReader = new RSSReader();
-
-			xr.setContentHandler(rssReader);
-			xr.parse(new InputSource(url.openStream()));
-
+			for (String feed : urls) {
+				url = new URL(feed);
+				RSSReader rssReader = new RSSReader();
+				xr.setContentHandler(rssReader);
+				xr.parse(new InputSource(url.openStream()));
+				articleList.addAll(rssReader.getArticleList());
+			}
 			Log.e("ASYNC", "PARSING FINISHED");
-			return rssReader.getArticleList();
+			return articleList;
 
 		} catch (IOException e) {
 			Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
