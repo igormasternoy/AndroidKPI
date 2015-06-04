@@ -99,7 +99,6 @@ public class RssService extends AsyncTask<String, Void, List<Article>> {
 			Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
 		} catch (SAXException e) {
 			Log.e("RSS Handler SAX", e.toString());
-			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			Log.e("RSS Handler Parser Config", e.toString());
 		}

@@ -18,13 +18,13 @@ import com.masternoy.igor.rss.entities.Feed;
 
 public class FeedRepository {
 
-	public static final String KEY_ROWID = BaseColumns._ID;
-	public static final String KEY_NAME = "name";
-	public static final String KEY_URL = "url";
+	static final String KEY_ROWID = BaseColumns._ID;
+	static final String KEY_NAME = "name";
+	static final String KEY_URL = "url";
 
-	private static final String DATABASE_NAME = "blogposts";
-	private static final String DATABASE_TABLE = "blogpostFeed";
-	private static final int DATABASE_VERSION = 1;
+	static final String DATABASE_NAME = "blogposts";
+	static final String DATABASE_TABLE = "blogpostFeed";
+	static final int DATABASE_VERSION = 1;
 
 	private static final String DATABASE_CREATE_LIST_TABLE = "create table if not exists "
 			+ DATABASE_TABLE
@@ -34,8 +34,8 @@ public class FeedRepository {
 			+ KEY_NAME
 			+ " text not null, " + KEY_URL + " text not null);";
 
-	private SQLiteHelper sqLiteHelper;
-	private SQLiteDatabase sqLiteDatabase;
+	SQLiteHelper sqLiteHelper;
+	SQLiteDatabase sqLiteDatabase;
 
 	public FeedRepository(Context c) {
 		sqLiteHelper = new SQLiteHelper(c, DATABASE_NAME, null,
